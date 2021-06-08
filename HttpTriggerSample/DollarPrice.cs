@@ -30,10 +30,9 @@ namespace HttpTriggerSample
         [Function("DollarPrice")]
         public async Task<DollarPriceResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequestData req,
+            string currency,
             FunctionContext executionContext)
         {
-            var currency = "EUR";// req?.Query["currency"].ToString();
-
             if (string.IsNullOrEmpty(currency)) {
                 goto finish;
             }
