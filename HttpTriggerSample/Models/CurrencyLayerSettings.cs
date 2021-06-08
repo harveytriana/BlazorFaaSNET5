@@ -9,7 +9,7 @@ namespace HttpTriggerSample.Models
     /// <summary>
     /// API Settings
     /// </summary>
-    public class CurrencyLayerApi
+    public class CurrencyLayerSettings
     {
         public string BaseUrl { get; set; }
         public string EndPoint { get; set; }

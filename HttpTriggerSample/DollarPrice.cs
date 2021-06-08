@@ -7,6 +7,7 @@ using HttpTriggerSample.Models;
 using HttpTriggerSample.Utils;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace HttpTriggerSample
@@ -20,12 +21,19 @@ namespace HttpTriggerSample
 
         readonly HttpClient _httpClient;
         readonly CurrencyTools _currencyTools;
-
-        public DollarPrice(IHttpClientFactory clientFactory, CurrencyTools currencyTools)
+        readonly CurrencyLayerSettings _settings;
+        
+        public DollarPrice(
+            IHttpClientFactory clientFactory,
+            IConfiguration configuration,
+            CurrencyTools currencyTools)
         {
             _httpClient = clientFactory.CreateClient();
             _currencyTools = currencyTools;
+            _settings = configuration.GetSection("CurrencyLayer").Get<CurrencyLayerSettings>();
         }
+
+        // Sample: http://localhost:7071/api/DollarPrice?currency=EUR
 
         [Function("DollarPrice")]
         public async Task<DollarPriceResult> Run(
