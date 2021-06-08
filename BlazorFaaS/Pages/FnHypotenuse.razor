@@ -1,0 +1,63 @@
+﻿@using System.Text.Json
+@page "/fn-hypotenuse"
+@inject HttpClient _httpClient
+
+<h2>Hypotenuse Azure Function</h2>
+<hr />
+<p>This component demonstrates a Http Trigger</p>
+<br />
+<form>
+	<div class="form-row">
+		<div class="col">
+			<input type="text" class="form-control" placeholder="X" @bind="_x">
+		</div>
+		<div class="col">
+			<input type="text" class="form-control" placeholder="Y" @bind="_y">
+		</div>
+	</div>
+</form>
+<br />
+<button class="btn btn-primary" style="width:200px" @onclick="CalculateHypotenuse">
+	Calculate
+</button>
+<br />
+<hr />
+<h4 class="i" style="color:darkgoldenrod">
+	@result
+</h4>
+
+@code {
+	string result;
+	double _x, _y, _h;
+
+	record Legs(double X, double Y);
+
+	protected override async Task OnInitializedAsync()
+	{
+		_x = 3;
+		_y = 4;
+		await CalculateHypotenuse();
+	}
+
+	protected async Task CalculateHypotenuse()
+	{
+		try
+		{
+			var legs = new Legs(_x, _y);
+			// call the api
+			var response = await _httpClient.PostAsJsonAsync<Legs>("api/Hypotenuse", legs);
+			var json = await response.Content.ReadAsStringAsync();
+			var so = new JsonSerializerOptions
+			{
+				PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+			};
+			_h = JsonSerializer.Deserialize<double>(json, so);
+
+			result = $"Hypotenuse({_x:0.00}, {_y:0.00}) = {_h:0.00}";
+		}
+		catch (Exception e)
+		{
+			result = $"Exception: {e.Message}";
+		}
+	}
+}

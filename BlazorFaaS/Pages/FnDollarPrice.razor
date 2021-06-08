@@ -1,0 +1,92 @@
+﻿@using System.Text.Json
+@using Client.Utils;
+@page "/fn-dollar-price"
+@inject HttpClient _httpClient
+
+<h1>Dollar Price Azure Function</h1>
+<hr />
+<p>This component demonstrates a Http Trigger</p>
+<br />
+@if (ls != null)
+{
+	<h4>Select Currency</h4>
+	<select class="form-control" @onchange="ChangeCurrency">
+		@foreach (var i in ls.Keys)
+		{
+		 <option value="@i">@i @ls[i]</option>
+		}
+	</select>
+	<br>
+	<hr>
+	<h4>Dollar Price for @currency</h4>
+	<div class="result">
+		@currencySymbol	@dollarPrice.ToString("#,##0.00")
+	</div>
+	<p style="color:darkslategrey">@timeStamp</p>
+}
+
+@code {
+	record DollarPrice(DateTime TimeStamp, string Currency, string CurrencySymbol, decimal Price);
+
+	IDictionary<string, string> ls;
+
+	string currency;
+	string currencyText;
+	string currencySymbol;
+	bool busy;
+	decimal dollarPrice;
+	DateTime timeStamp;
+
+	protected override async Task OnInitializedAsync()
+	{
+		var js = ResourceReader.Read("cl-currencies.json");
+
+		ls = JsonSerializer.Deserialize<IDictionary<string, string>>(js);
+
+		// initilize value
+		await Task.Delay(300);
+		currency = "EUR";
+		await GetDollarPrice();
+	}
+
+	async Task ChangeCurrency(ChangeEventArgs e)
+	{
+		var y = e.Value.ToString();
+		if (currency != y)
+		{
+			currency = y;
+			currencyText = ls[currency];
+			await GetDollarPrice();
+		}
+	}
+
+	async Task GetDollarPrice()
+	{
+		if (busy)
+		{
+			return;
+		}
+		busy = true;
+		try
+		{
+			// call azure function, p.e. localhost:7071/api/DollarPrice?currency=EUR ->
+			//
+			var so = new JsonSerializerOptions()
+			{
+				PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+			};
+			var data = await _httpClient.GetFromJsonAsync<DollarPrice>($"api/DollarPrice?currency={currency}", so);
+			// update UI
+			dollarPrice = data.Price;
+			currencySymbol = data.CurrencySymbol;
+			timeStamp = data.TimeStamp;
+
+			Console.WriteLine("timeStamp: {0}", timeStamp);
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine($"Exception: {e.Message}");
+		}
+		busy = false;
+	}
+}

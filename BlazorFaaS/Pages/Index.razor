@@ -1,0 +1,18 @@
+﻿@page "/"
+
+<h2>
+	Blazor running FaaS
+</h2>
+<hr />
+<p>
+	@ms
+</p>
+@code {
+	string description = @"
+This is an example of how Azure serverless functions can be consumed from Blazor WASM.
+<br><br>
+To run this project in development mode, the <b>HttpTriggerSample</b> project must be run simultaneously.
+	";
+
+	MarkupString ms => (MarkupString)description;
+}
