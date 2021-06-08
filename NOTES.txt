@@ -1,0 +1,4 @@
+
+
+Azure Functions and .NET 5: Dependency Injection
+https://dev.to/kenakamu/azure-functions-and-net-5-dependency-injection-5ed4
