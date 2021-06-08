@@ -13,3 +13,11 @@ http://localhost:7071/api/DollarPrice?currency=EUR
   "CurrencySymbol": "$",
   "Price": 3607.5
 }
+
+API
+/*
+* API SOURCE
+* https://currencylayer.com/
+* Sample
+* http://localhost:7071/api/DollarPrice?currency=COP
+*/

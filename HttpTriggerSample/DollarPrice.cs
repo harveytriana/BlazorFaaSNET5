@@ -12,7 +12,12 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-
+/*
+* API SOURCE
+* https://currencylayer.com/
+* Sample
+* http://localhost:7071/api/DollarPrice?currency=COP
+*/
 namespace HttpTriggerSample
 {
     public class DollarPrice
