@@ -21,7 +21,7 @@ namespace HttpTriggerSample
             catch (Exception e) {
                 executionContext.GetLogger("Hypotenuse").LogError($"Exception: {e.Message}");
             }
-            return 0.0;
+            return -999.25;
         }
     }
     record Legs(double X, double Y);
