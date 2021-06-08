@@ -1,3 +1,6 @@
+// ======================================
+// BlazorSpread.net
+// ======================================
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -14,11 +17,6 @@ namespace HttpTriggerSample
 {
     public class DollarPrice
     {
-        const string
-            ACCESS_KEY = "398166e843713aa66aef35b0e58347e4",
-            BASE_URL = "http://api.currencylayer.com/",
-            ENDPOINT = "live";
-
         readonly HttpClient _httpClient;
         readonly CurrencyTools _currencyTools;
         readonly CurrencyLayerSettings _settings;
@@ -29,11 +27,9 @@ namespace HttpTriggerSample
             CurrencyTools currencyTools)
         {
             _httpClient = clientFactory.CreateClient();
-            _currencyTools = currencyTools;
             _settings = configuration.GetSection("CurrencyLayer").Get<CurrencyLayerSettings>();
+            _currencyTools = currencyTools;
         }
-
-        // Sample: http://localhost:7071/api/DollarPrice?currency=EUR
 
         [Function("DollarPrice")]
         public async Task<DollarPriceResult> Run(
@@ -45,7 +41,8 @@ namespace HttpTriggerSample
                 goto finish;
             }
 
-            var url = $"{BASE_URL}/{ENDPOINT}?access_key={ACCESS_KEY}&source=USD&currencies={currency}";
+            var url = $"{_settings.BaseUrl}/{_settings.EndPoint}?access_key=" 
+                    + $"{_settings.AccessKey}&source=USD&currencies={currency}";
             try {
                 var data = await _httpClient.GetFromJsonAsync<CurrencyLayerResult>(url);
                 return new DollarPriceResult {

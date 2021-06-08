@@ -18,7 +18,7 @@ namespace HttpTriggerSample
         public string Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
             FunctionContext executionContext)
         {
-            return $"Setting: {_settings.AccessKey}";
+            return $"Setting: {_settings.BaseUrl}";
         }
     }
 }

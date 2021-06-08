@@ -69,19 +69,12 @@
 		busy = true;
 		try
 		{
-			// call azure function, p.e. localhost:7071/api/DollarPrice?currency=EUR ->
-			//
-			var so = new JsonSerializerOptions()
-			{
-				PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-			};
-			var data = await _httpClient.GetFromJsonAsync<DollarPrice>($"api/DollarPrice?currency={currency}", so);
+			// call azure function
+			var data = await _httpClient.GetFromJsonAsync<DollarPrice>($"api/DollarPrice?currency={currency}");
 			// update UI
 			dollarPrice = data.Price;
 			currencySymbol = data.CurrencySymbol;
 			timeStamp = data.TimeStamp;
-
-			Console.WriteLine("timeStamp: {0}", timeStamp);
 		}
 		catch (Exception e)
 		{

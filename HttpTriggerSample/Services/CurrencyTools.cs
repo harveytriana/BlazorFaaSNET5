@@ -14,7 +14,7 @@ namespace HttpTriggerSample.Utils
 
         public CurrencyTools()
         {
-            // get currency symbols key-value
+            // cache currency symbols key-value
             _ls = CultureInfo
                 .GetCultures(CultureTypes.AllCultures)
                 .Where(c => !c.IsNeutralCulture)

@@ -1,8 +1,10 @@
+// ======================================
+// BlazorSpread.net
+// ======================================
 using HttpTriggerSample.Utils;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Reflection;
 
 namespace HttpTriggerSample
@@ -18,11 +20,11 @@ namespace HttpTriggerSample
                         services.AddHttpClient();
                         services.AddSingleton<CurrencyTools>();
                     })
-                .ConfigureAppConfiguration(x => {
-                    x.AddJsonFile("appsettings.json");
-                    x.AddEnvironmentVariables();
-                    x.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
-                    x.Build();
+                .ConfigureAppConfiguration(config => {
+                    config.AddJsonFile("appsettings.json");
+                    config.AddEnvironmentVariables();
+                    config.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+                    config.Build();
                 })
                 .Build();
             host.Run();
