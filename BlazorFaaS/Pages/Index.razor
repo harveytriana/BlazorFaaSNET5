@@ -7,12 +7,16 @@
 <p>
 	@ms
 </p>
+
 @code {
-	string description = @"
+	MarkupString ms => (MarkupString)description;
+
+	string description = $@"
 This is an example of how Azure serverless functions can be consumed from Blazor WASM.
 <br><br>
 To run this project in development mode, the <b>HttpTriggerSample</b> project must be run simultaneously.
-	";
+<br><br>
+Serverless Functions origin: <b>{fs}<b>.";
 
-	MarkupString ms => (MarkupString)description;
+	static string fs => Program.IS_DEVELOPMENT ? "DevelopmentStorage" : "Azure";
 }

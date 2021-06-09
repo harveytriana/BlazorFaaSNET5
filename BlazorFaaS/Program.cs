@@ -1,3 +1,6 @@
+// ======================================
+// BlazorSpread.net
+// ======================================
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -8,17 +11,20 @@ namespace BlazorFaaS
 {
     public class Program
     {
+        public static bool IS_DEVELOPMENT { get; private set; }
+
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            var functionsbase = builder.HostEnvironment.IsDevelopment()?
+            IS_DEVELOPMENT = builder.HostEnvironment.IsDevelopment();
+
+            var functionsbase = IS_DEVELOPMENT ?
                 "http://localhost:7071" :
                 "https://httptriggersample2021.azurewebsites.net";
 
-            builder.Services.AddScoped(sp => new HttpClient
-            {
+            builder.Services.AddScoped(sp => new HttpClient {
                 BaseAddress = new Uri(functionsbase)
             });
 
