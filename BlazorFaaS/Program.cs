@@ -22,7 +22,7 @@ namespace BlazorFaaS
 
             var functionsbase = IS_DEVELOPMENT ?
                 "http://localhost:7071" :
-                "https://httptriggersample2021.azurewebsites.net";
+                "https://YOUR_FUNCTION_APP.azurewebsites.net";
 
             builder.Services.AddScoped(sp => new HttpClient {
                 BaseAddress = new Uri(functionsbase)

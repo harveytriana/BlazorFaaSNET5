@@ -24,5 +24,7 @@ namespace HttpTriggerSample
             return -999.25;
         }
     }
+
+    // input object type
     record Legs(double X, double Y);
 }

@@ -3,7 +3,7 @@
 @page "/fn-dollar-price"
 @inject HttpClient _httpClient
 
-<h1>Dollar Price Azure Function</h1>
+<h2>Dollar Price Azure Function</h2>
 <hr />
 <p>This component demonstrates a Http Trigger</p>
 <br />
@@ -20,9 +20,9 @@
 	<hr>
 	<h4>Dollar Price for @currency</h4>
 	<div class="result">
-		@currencySymbol	@dollarPrice.ToString("#,##0.00")
+		@currencySymbol	@dollarPrice
 	</div>
-	<p style="color:darkslategrey">@timeStamp</p>
+	<p class="prompt">@prompt</p>
 }
 
 @code {
@@ -34,8 +34,8 @@
 	string currencyText;
 	string currencySymbol;
 	bool busy;
-	decimal dollarPrice;
-	DateTime timeStamp;
+	string dollarPrice;
+	string prompt;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -72,13 +72,13 @@
 			var functionUrl = $"api/DollarPrice?currency={currency}";
 			var data = await _httpClient.GetFromJsonAsync<DollarPrice>(functionUrl);
 			// update UI
-			dollarPrice = data.Price;
+			dollarPrice = data.Price.ToString("#,##0.000");
 			currencySymbol = data.CurrencySymbol;
-			timeStamp = data.TimeStamp;
+			prompt = $"Time Stamp: {data.TimeStamp}";
 		}
 		catch (Exception e)
 		{
-			Console.WriteLine($"Exception: {e.Message}");
+			prompt = $"Exception: {e.Message}";
 		}
 		busy = false;
 	}

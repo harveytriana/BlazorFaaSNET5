@@ -27,21 +27,3 @@ API
 * http://localhost:7071/api/DollarPrice?currency=COP
 */
 
-Azure, development accout
-https://httptriggersample2021.azurewebsites.net/api/hypotenuse
-https://httptriggersample2021.azurewebsites.net/api/DollarPrice?currency=COP
-https://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>?code=<API_KEY>
-
-
-Guía para la ejecución de funciones en .NET 5.0 en Azure
-https://docs.microsoft.com/es-es/azure/azure-functions/dotnet-isolated-process-guide
-
-
-Azure Key Vault configuration provider in ASP.NET Core
-------------------------------------------------------
-https://docs.microsoft.com/en-us/aspnet/core/security/key-vault-configuration?view=aspnetcore-5.0
-az keyvault create --name CurrencyLayer --resource-group "BlazorTests" --location "South Central US"
-az keyvault create --name {KEY VAULT NAME} --resource-group "{RESOURCE GROUP NAME}" --location {LOCATION}
-
-az keyvault secret set --vault-name CurrencyLayer --name "CurrencyLayer--AccessKey" --value "398166e843713aa66aef35b0e58347e4"
-az keyvault secret set --vault-name {KEY VAULT NAME} --name "SecretName" --value "secret_value_1_prod"

@@ -15,17 +15,19 @@ namespace HttpTriggerSample
         {
             var host = new HostBuilder()
                 .ConfigureFunctionsWorkerDefaults()
-                // enables DI
+                // enable DI
                 .ConfigureServices(
                     services => {
+                        // enable http service
                         services.AddHttpClient();
+                        // enable custom service
                         services.AddSingleton<CurrencyTools>();
                     })
-                // enables settings file
+                // enable settings file
                 .ConfigureAppConfiguration(config => {
                     config.AddJsonFile("appsettings.json");
                     config.AddEnvironmentVariables();
-                    // enables user screts
+                    // enable user screts
                     config.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
                     config.Build();
                 })
