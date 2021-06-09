@@ -69,8 +69,8 @@
 		busy = true;
 		try
 		{
-			// call azure function
-			var data = await _httpClient.GetFromJsonAsync<DollarPrice>($"api/DollarPrice?currency={currency}");
+			var functionUrl = $"api/DollarPrice?currency={currency}";
+			var data = await _httpClient.GetFromJsonAsync<DollarPrice>(functionUrl);
 			// update UI
 			dollarPrice = data.Price;
 			currencySymbol = data.CurrencySymbol;

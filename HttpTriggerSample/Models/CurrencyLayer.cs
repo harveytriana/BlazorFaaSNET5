@@ -9,7 +9,7 @@ namespace HttpTriggerSample.Models
     /// <summary>
     /// API Settings
     /// </summary>
-    public class CurrencyLayerSettings
+    public record CurrencyLayerSettings
     {
         public string BaseUrl { get; set; }
         public string EndPoint { get; set; }
@@ -17,14 +17,13 @@ namespace HttpTriggerSample.Models
     }
 
     /// <summary>
-    /// Map https://currencylayer.com/ response
+    /// Map API response
     /// </summary>
-    public class CurrencyLayerResult
-    {
-        public bool Success { get; set; }
-        public long Timestamp { get; set; }
-        public Dictionary<string, decimal> Quotes { get; set; }
-    }
+    public record CurrencyLayerResult(
+        bool Success,
+        long Timestamp,
+        Dictionary<string, decimal> Quotes
+    );
 
     /// <summary>
     /// Function response

@@ -28,17 +28,17 @@ namespace HttpTriggerSample
         
         public DollarPrice(
             IHttpClientFactory clientFactory,
-            IConfiguration configuration,
+            IConfiguration config,
             CurrencyTools currencyTools)
         {
             _httpClient = clientFactory.CreateClient();
-            _settings = configuration.GetSection("CurrencyLayer").Get<CurrencyLayerSettings>();
             _currencyTools = currencyTools;
+            _settings = config.GetSection("CurrencyLayer").Get<CurrencyLayerSettings>();
         }
 
         [Function("DollarPrice")]
         public async Task<DollarPriceResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequestData req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req,
             string currency,
             FunctionContext executionContext)
         {
