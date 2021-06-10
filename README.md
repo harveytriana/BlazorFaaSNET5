@@ -43,7 +43,7 @@ It concerns a template project **Azure Funtions**, with solution name: **BlazorF
 
 Initially I write a function in which an object is sent as a parameter, and a value is returned. Although the function is very simple, it illustrates the general case for this type of schema. I use the *Hypotenuse* function as an example, which takes two numbers as parameters, the legs, and returns a value. In mathematical terms:
 
-![](https://github.com/harveytriana/BlazorFaaSNET5/blob/master/hypotenuse.png)
+![](https://github.com/harveytriana/BlazorFaaSNET5/blob/master/Screenshypotenuse.png)
 
 To address this simple problem you could just use a GET and pass the legs in the URL. However, the goal is to illustrate how to pass an object in a POST and expect a value (or type). For this I create a type `Legs` for the parameter; I use a record type, which has advantages such as less code and more efficiency, in addition, the input values are not modified, a mutable object is not needed.
 
@@ -420,7 +420,7 @@ The Blazor *HypotenusePage* component
 
 As the following code reads, it is normal Blazor code, where an API is invoked over HTTP. I did not publish the HTML here, it is already simple, and a designer will write better.
 
-![](https://github.com/harveytriana/BlazorFaaSNET5/blob/master/bz_faas-1.png)
+![](https://github.com/harveytriana/BlazorFaaSNET5/blob/master/Screensbz_faas-1.png)
 
 *HypotenusePage*
 
@@ -467,7 +467,7 @@ As the following code reads, it is normal Blazor code, where an API is invoked o
 
 Likewise, it is a Blazor component that consumes an API. To give an elegant UI, I added the ISO three letter currency list next to the country name, for user selection. This data can be downloaded from the API vendor, [»»](https://currencylayer.com/site_downloads/cl-currencies-select-option.txt)
 
-![](https://github.com/harveytriana/BlazorFaaSNET5/blob/master/bz_faas-2.png)
+![](https://github.com/harveytriana/BlazorFaaSNET5/blob/master/Screensbz_faas-2.png)
 
 *Componente DollarPricePage*
 
@@ -569,7 +569,7 @@ After publishing the function app to Azure, the configuration settings for user 
 
 Similarly, we must enable CORS in Azure so that the resource is allowed to be used from the Blazor application. For this we go to the CORS section of the resource in Azure, and we allow all origins with an asterisk.
 
-![](https://github.com/harveytriana/BlazorFaaSNET5/blob/master/az-cors.png)
+![](https://github.com/harveytriana/BlazorFaaSNET5/blob/master/Screensaz-cors.png)
 
 Now you can run the Blazor app to check that everything is going great.
 
