@@ -71,8 +71,7 @@ namespace HttpTriggerSample
                 return Math.Sqrt(Math.Pow(legs.X, 2.0) + Math.Pow(legs.Y, 2.0));
             }
             catch (Exception e) {
-                executionContext.GetLogger("Hypotenuse")
-							    .LogError($"Exception: {e.Message}");
+                executionContext.GetLogger("Hypotenuse").LogError(e.Message);
             }
             return -999.25;
         }
