@@ -71,10 +71,14 @@
 		{
 			var functionUrl = $"api/DollarPrice?currency={currency}";
 			var data = await _httpClient.GetFromJsonAsync<DollarPrice>(functionUrl);
-			// update UI
-			dollarPrice = data.Price.ToString("#,##0.000");
-			currencySymbol = data.CurrencySymbol;
-			prompt = $"Time Stamp: {data.TimeStamp}";
+			if (data != null) {// update UI
+				dollarPrice = data.Price.ToString("#,##0.00");
+				currencySymbol = data.CurrencySymbol;
+				prompt = $"Time Stamp: {data.TimeStamp}";
+			}
+			else {
+				prompt = $"Unexpectedly returns null";
+			}
 		}
 		catch (Exception e)
 		{
