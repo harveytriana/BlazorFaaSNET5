@@ -23,8 +23,8 @@ namespace HttpTriggerSample
                         // enable custom service
                         services.AddSingleton<CurrencyTools>();
                     })
-                // enable settings file
                 .ConfigureAppConfiguration(config => {
+                    // enable settings file
                     config.AddJsonFile("appsettings.json");
                     config.AddEnvironmentVariables();
                     // enable user screts
